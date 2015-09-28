@@ -16,6 +16,7 @@ public class ViewLayout implements MyComponent {
 	
 	final TabSheet parent;
 	final Container container;
+	final EditLayout editLayout;
 	
 	final VerticalLayout layout = new VerticalLayout();
 	final HorizontalLayout toolbar = new HorizontalLayout();
@@ -23,10 +24,13 @@ public class ViewLayout implements MyComponent {
 	final Button deleteButton = new Button("Delete");
 	final Table table;
 	
-	public ViewLayout(TabSheet parent, Container container) {
+	
+	public ViewLayout(TabSheet parent, Container container,
+			EditLayout editLayout) {
 		super();
 		this.parent = parent;
 		this.container = container;
+		this.editLayout = editLayout;
 		this.table = (Table) new MyTable(container).init();
 	}
 
@@ -49,6 +53,7 @@ public class ViewLayout implements MyComponent {
 		
 		editButton.addClickListener((e) -> {
 			parent.setSelectedTab(1);
+			editLayout.refresh(table.getValue());
 		});
 		
 		deleteButton.addClickListener((e) -> {
@@ -57,6 +62,12 @@ public class ViewLayout implements MyComponent {
 			deleteButton.setEnabled(false);
 			editButton.setEnabled(false);
 		});
+	}
+
+	@Override
+	public void refresh(Object... objects) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 /*

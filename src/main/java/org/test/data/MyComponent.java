@@ -8,4 +8,6 @@ public interface MyComponent extends Serializable {
 
 	public Component init();
 	
+	public void refresh(Object... objects);
+	
 }

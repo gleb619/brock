@@ -4,6 +4,7 @@ import javax.servlet.annotation.WebServlet;
 
 import org.test.data.MockupContainer;
 import org.test.data.MyComponent;
+import org.test.layout.EditLayout;
 import org.test.layout.ViewLayout;
 
 import com.vaadin.annotations.Theme;
@@ -30,7 +31,9 @@ public class MyUI extends UI {
 	final VerticalLayout root = new VerticalLayout();
 	final TabSheet tabsheet = new TabSheet();
 	final MockupContainer container = new MockupContainer();
-	final ViewLayout table = new ViewLayout(tabsheet, container.getContainer()); 
+	
+	final EditLayout form = new EditLayout(container.getContainer());
+	final ViewLayout table = new ViewLayout(tabsheet, container.getContainer(), form);
 	
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -54,9 +57,8 @@ public class MyUI extends UI {
 
         // This tab gets its caption from the component caption
         VerticalLayout tab2 = new VerticalLayout();
-//        tab2.addComponent();
+        tab2.addComponent(form.init());
         tabsheet.addTab(tab2, "Edit");
-        
         
         root.addComponent(tabsheet);
 
